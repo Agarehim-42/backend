@@ -17,3 +17,6 @@ const studentInfo = Array.prototype.map.call(students, function (student) {
 });
 
 console.log(studentInfo);
+
+
+//yakinda
