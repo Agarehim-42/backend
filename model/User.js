@@ -1,7 +1,10 @@
 import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
-import crypto from "crypto-js"
+
+
+//Node Js 18ci versiyadan sonra crypto ozunde saxlayir
+import crypto from "crypto"
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -68,11 +71,22 @@ userSchema.methods.jwtTokeniEldeEt = function () {
 userSchema.methods.shifreleriMuqayiseEt = async function(enteredPassword) {
     return await bcrypt.compare(enteredPassword , this.password)
 }
-
+// 8080 80 http port     443 https port  interview suali
+// Azure istifade ederek free olan bir MFA (Multi Factor Authentication) alqoritmini mene yaz
 userSchema.methods.getResetPasswordToken = function() {
-const resetToken = crypto.randomBytes(20)
-}
+const resetToken = crypto.randomBytes(20).toString("hex")
 
+
+this.resetPasswordToken = crypto.createHash("sha256").update(resetToken).digest("hex")
+this.resetPasswordExpire = Date.now() + 30*60*1000
+
+return resetToken
+//a10212131314cf474
+//randomBytes , hex ve toString melumat ver
+// call apply bind metodunu arashdir
+// hex 16lig sistem
+}
+//20 yazanda 20 simvollu token verir , 10 defe kruq eliyir yeni duzlayir
 //this arrow function oz lexical enviroimenti olmur 
 
 
