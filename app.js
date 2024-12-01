@@ -2,7 +2,6 @@ import express from "express"
 import dotenv from "dotenv"
 import { connectDatabase } from "./config/dbConnect.js"
 // Router
-import productsRouter from "./routes/product.js"
 import userRouter from "./routes/auth.js"
 import errorMiddleware from "./middleware/errors.js"
 
@@ -35,7 +34,6 @@ app.use(express.json());
 //daha sonra girisi istek ata biler
 app.use(cookieParser())
 
-app.use("/api/v1", productsRouter)
 app.use("/crud/v1", userRouter)
 
 

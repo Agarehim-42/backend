@@ -24,7 +24,7 @@ export const isAuthenticatedUser = catchAsyncErrors(async(req , res , next) => {
     catch(err) {
         return next(new ErrorHandler("Girish etmelisen" , 401))
     }
-
+//backend
 
   
 })
