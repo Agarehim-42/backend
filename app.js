@@ -4,11 +4,14 @@ import { connectDatabase } from "./config/dbConnect.js"
 // Router
 import userRouter from "./routes/auth.js"
 import errorMiddleware from "./middleware/errors.js"
+import adminRoutes from "./routes/admin.js";
 
 import cookieParser from "cookie-parser"
 
 import User from "./model/User.js"
 // default named import istediyimizi qoya bilerik
+
+
 
 dotenv.config({
     path: "config/config.env"
@@ -35,6 +38,8 @@ app.use(express.json());
 app.use(cookieParser())
 
 app.use("/crud/v1", userRouter)
+
+app.use("/api/admin", adminRoutes);
 
 
 // Tetbiq seviyyesinde (Application levelde) istifade edirik
